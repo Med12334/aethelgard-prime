@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: cbdc-rtgs-clearing-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/aethelgard_prime_db
+    username: aethelgard_admin
+    password: aethelgard_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update

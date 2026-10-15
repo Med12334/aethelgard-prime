@@ -1,0 +1,93 @@
+name: Aethelgard-Prime 24-Layer 10-Language CI Matrix
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  layer23-architecture-verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Layer 23 Bash Architecture Integrity Audit
+        run: bash ./scripts/verify-planetary-layers.sh
+
+  layers3to5-rust-pqc-wasm-ebpf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile & Test Rust PQC Lattice, Wasm Sandbox & eBPF XDP
+        working-directory: ./rust-pqc-wasm-ebpf
+        run: cargo test --verbose
+
+  layers6to8-go-orbital-bft-mesh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go 1.22
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - name: Run Go Orbital Laser, BFT Consensus & Micro-VM Tests
+        working-directory: ./go-orbital-bft-mesh
+        run: go test -v ./...
+
+  layers9to10-cpp20-lob-and-physics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile & Execute C++20 Limit Order Book & Orbital Solver
+        run: |
+          g++ -std=c++20 -O3 cpp-lob-physics-core/src/aethelgard_lob_physics.cpp -o cpp_lob_test
+          ./cpp_lob_test
+
+  layer11-c11-baremetal-dma-ring:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile & Execute ANSI C11 Bare-Metal DMA Ring Buffer
+        run: |
+          gcc -std=c11 -O3 -Wall -Wextra c-baremetal-dma/src/nvme_dma_ring.c -o c_dma_test
+          ./c_dma_test
+
+  layers12to14-python-exascale-biogen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Pytest Suite (MoE Router, Federated ML & CRISPR Genomics)
+        working-directory: ./python-exascale-biogen
+        run: |
+          pip install -r requirements.txt
+          PYTHONPATH=. pytest -v
+
+  layers15to20-jvm-kotlin-and-java17:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Compile & Test Kotlin 1.9 Coroutiner, Java 17 CBDC RTGS & DB2 Bridge
+        working-directory: ./jvm-sovereign-clearing
+        run: mvn clean test package
+
+  layer2-nodejs-graphql-federation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run Node.js Federation Gateway Tests
+        working-directory: ./node-graphql-federation
+        run: npm test

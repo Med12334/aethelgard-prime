@@ -1,0 +1,8 @@
+[package]
+name = "aethelgard-rust-sovereign"
+version = "1.0.0"
+edition = "2021"
+authors = ["Med12334 <Mohamedkhelifi41@gmail.com>"]
+description = "Layers 3, 4 & 5: Rust Post-Quantum Lattice Crypto, Wasm Fuel Sandbox & eBPF XDP Scrubber"
+
+[dependencies]

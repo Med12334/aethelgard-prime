@@ -1,0 +1,10 @@
+{
+  "name": "aethelgard-graphql-federation-edge",
+  "version": "1.0.0",
+  "description": "Layer 2: Unified GraphQL and REST Planetary Telemetry Federation Gateway",
+  "type": "module",
+  "scripts": {
+    "start": "node federation_gateway.mjs",
+    "test": "node --test federation_gateway.test.mjs"
+  }
+}
